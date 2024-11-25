@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.plcoding.jetpackcomposemasterclass.basic_layout.HotelBookingScreen
+import com.plcoding.jetpackcomposemasterclass.basic_modifiers.FocusManagementModifiers
 import com.plcoding.jetpackcomposemasterclass.basic_modifiers.SpacingModifierDemo
 import com.plcoding.jetpackcomposemasterclass.state_management.number_guess.NumberGuessScreenRoot
 import com.plcoding.jetpackcomposemasterclass.ui.theme.JetpackComposeMasterclassTheme
@@ -35,12 +36,10 @@ class MainActivity : ComponentActivity() {
             JetpackComposeMasterclassTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    contentWindowInsets = WindowInsets.safeGestures
                 ) { innerPadding ->
-                    SpacingModifierDemo(
+                    FocusManagementModifiers(
                         modifier = Modifier
                             .padding(innerPadding)
-                            .consumeWindowInsets(innerPadding)
                     )
                 }
             }
