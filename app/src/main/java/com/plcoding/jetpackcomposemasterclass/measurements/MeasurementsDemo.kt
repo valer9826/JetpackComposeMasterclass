@@ -3,7 +3,6 @@ package com.plcoding.jetpackcomposemasterclass.measurements
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,15 +10,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import com.plcoding.jetpackcomposemasterclass.ui.theme.JetpackComposeMasterclassTheme
 
 
 private val boundedConstraints = Constraints(
-    minWidth = 50,
-    maxWidth = 100,
-    minHeight = 70,
-    maxHeight = 150
+    minWidth = 2000,
+    maxWidth = 2000,
+    minHeight = 0,
+    maxHeight = 3000
 )
 
 private val unboundedConstraints = Constraints()
