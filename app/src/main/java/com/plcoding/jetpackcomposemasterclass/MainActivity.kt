@@ -31,14 +31,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.plcoding.jetpackcomposemasterclass.basic_layout.HotelBookingScreen
 import com.plcoding.jetpackcomposemasterclass.basic_modifiers.FocusManagementModifiers
 import com.plcoding.jetpackcomposemasterclass.basic_modifiers.SpacingModifierDemo
+import com.plcoding.jetpackcomposemasterclass.measurements.LazyMindMap
 import com.plcoding.jetpackcomposemasterclass.measurements.LazyScrolling
+import com.plcoding.jetpackcomposemasterclass.measurements.MindMapItem
 import com.plcoding.jetpackcomposemasterclass.measurements.SizeModifiersDemo
 import com.plcoding.jetpackcomposemasterclass.measurements.SizePositionModifiersDemo
 import com.plcoding.jetpackcomposemasterclass.measurements.SubcomposePagedRow
@@ -55,33 +59,52 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                 ) { innerPadding ->
-                    var page by remember {
-                        mutableIntStateOf(0)
-                    }
-                    Column(
-                        modifier = Modifier
-                            .padding(innerPadding)
-                    ) {
-                        SubcomposePagedRow(
-                            page = page,
-                            modifier = Modifier
-                                .background(Color.Red)
-                        ) {
-                            (1..1000).forEach {
-                                Box(
-                                    modifier = Modifier
-                                        .height(100.dp)
-                                        .width(Random.nextInt(300).dp)
-                                        .background(Color(Random.nextInt()))
+                    val mindMapItems = remember {
+                        listOf(
+                            MindMapItem(
+                                title = "Hello world 1",
+                                percentageOffset = Offset(
+                                    x = 0f,
+                                    y = 0f
                                 )
-                            }
-                        }
-                        Button(onClick = {
-                            page++
-                        }) {
-                            Text("Go to next page")
-                        }
+                            ),
+                            MindMapItem(
+                                title = "Hello world 2",
+                                percentageOffset = Offset(
+                                    x = 1f,
+                                    y = 0f
+                                )
+                            ),
+                            MindMapItem(
+                                title = "Hello world 3",
+                                percentageOffset = Offset(
+                                    x = 0.3f,
+                                    y = -0.5f
+                                )
+                            ),
+                            MindMapItem(
+                                title = "Hello world 4",
+                                percentageOffset = Offset(
+                                    x = -0.2f,
+                                    y = 1.5f
+                                )
+                            ),
+                        )
                     }
+
+                    var mindMapOffset by remember {
+                        mutableStateOf(IntOffset.Zero)
+                    }
+                    LazyMindMap(
+                        items = mindMapItems,
+                        mindMapOffset = mindMapOffset,
+                        onDrag = { delta ->
+                            mindMapOffset += delta
+                        },
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(innerPadding)
+                    )
                 }
             }
         }
