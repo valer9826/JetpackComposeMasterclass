@@ -25,6 +25,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.plcoding.jetpackcomposemasterclass.basic_layout.HotelBookingScreen
 import com.plcoding.jetpackcomposemasterclass.basic_modifiers.FocusManagementModifiers
 import com.plcoding.jetpackcomposemasterclass.basic_modifiers.SpacingModifierDemo
+import com.plcoding.jetpackcomposemasterclass.measurements.LazyScrolling
 import com.plcoding.jetpackcomposemasterclass.measurements.SizeModifiersDemo
 import com.plcoding.jetpackcomposemasterclass.measurements.SizePositionModifiersDemo
 import com.plcoding.jetpackcomposemasterclass.state_management.number_guess.NumberGuessScreenRoot
@@ -36,15 +37,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             JetpackComposeMasterclassTheme {
-                SizePositionModifiersDemo()
-//                Scaffold(
-//                    modifier = Modifier.fillMaxSize(),
-//                ) { innerPadding ->
-//                    FocusManagementModifiers(
-//                        modifier = Modifier
-//                            .padding(innerPadding)
-//                    )
-//                }
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                ) { innerPadding ->
+                    LazyScrolling(
+                        modifier = Modifier
+                            .padding(innerPadding)
+                    )
+                }
             }
         }
     }
