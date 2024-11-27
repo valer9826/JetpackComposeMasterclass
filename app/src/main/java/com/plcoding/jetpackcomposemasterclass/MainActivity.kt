@@ -26,6 +26,7 @@ import com.plcoding.jetpackcomposemasterclass.basic_layout.HotelBookingScreen
 import com.plcoding.jetpackcomposemasterclass.basic_modifiers.FocusManagementModifiers
 import com.plcoding.jetpackcomposemasterclass.basic_modifiers.SpacingModifierDemo
 import com.plcoding.jetpackcomposemasterclass.measurements.SizeModifiersDemo
+import com.plcoding.jetpackcomposemasterclass.measurements.SizePositionModifiersDemo
 import com.plcoding.jetpackcomposemasterclass.state_management.number_guess.NumberGuessScreenRoot
 import com.plcoding.jetpackcomposemasterclass.ui.theme.JetpackComposeMasterclassTheme
 
@@ -35,7 +36,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             JetpackComposeMasterclassTheme {
-                SizeModifiersDemo()
+                SizePositionModifiersDemo()
 //                Scaffold(
 //                    modifier = Modifier.fillMaxSize(),
 //                ) { innerPadding ->
