@@ -49,6 +49,7 @@ import com.plcoding.jetpackcomposemasterclass.measurements.SizePositionModifiers
 import com.plcoding.jetpackcomposemasterclass.measurements.SubcomposePagedRow
 import com.plcoding.jetpackcomposemasterclass.side_effects.DisposableEffectDemo
 import com.plcoding.jetpackcomposemasterclass.side_effects.LaunchedEffectDemo
+import com.plcoding.jetpackcomposemasterclass.side_effects.RememberUpdatedStateDemo
 import com.plcoding.jetpackcomposemasterclass.state_management.number_guess.NumberGuessScreenRoot
 import com.plcoding.jetpackcomposemasterclass.ui.theme.JetpackComposeMasterclassTheme
 import kotlin.random.Random
@@ -62,23 +63,9 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                 ) { innerPadding ->
-                    var toggle by remember {
-                        mutableStateOf(false)
-                    }
-                    if(!toggle) {
-                        DisposableEffectDemo()
-                    }
-                    Button(
-                        onClick = {
-                            toggle = !toggle
-                        },
-                        modifier = Modifier
-                            .padding(innerPadding)
-                            .fillMaxSize()
-                            .wrapContentSize()
-                    ) {
-                        Text("Toggle")
-                    }
+                    RememberUpdatedStateDemo(
+                        modifier = Modifier.padding(innerPadding)
+                    )
                 }
             }
         }
