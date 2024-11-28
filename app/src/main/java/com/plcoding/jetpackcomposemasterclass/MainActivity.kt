@@ -46,6 +46,7 @@ import com.plcoding.jetpackcomposemasterclass.measurements.MindMapItem
 import com.plcoding.jetpackcomposemasterclass.measurements.SizeModifiersDemo
 import com.plcoding.jetpackcomposemasterclass.measurements.SizePositionModifiersDemo
 import com.plcoding.jetpackcomposemasterclass.measurements.SubcomposePagedRow
+import com.plcoding.jetpackcomposemasterclass.side_effects.LaunchedEffectDemo
 import com.plcoding.jetpackcomposemasterclass.state_management.number_guess.NumberGuessScreenRoot
 import com.plcoding.jetpackcomposemasterclass.ui.theme.JetpackComposeMasterclassTheme
 import kotlin.random.Random
@@ -59,52 +60,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                 ) { innerPadding ->
-                    val mindMapItems = remember {
-                        listOf(
-                            MindMapItem(
-                                title = "Hello world 1",
-                                percentageOffset = Offset(
-                                    x = 0f,
-                                    y = 0f
-                                )
-                            ),
-                            MindMapItem(
-                                title = "Hello world 2",
-                                percentageOffset = Offset(
-                                    x = 1f,
-                                    y = 0f
-                                )
-                            ),
-                            MindMapItem(
-                                title = "Hello world 3",
-                                percentageOffset = Offset(
-                                    x = 0.3f,
-                                    y = -0.5f
-                                )
-                            ),
-                            MindMapItem(
-                                title = "Hello world 4",
-                                percentageOffset = Offset(
-                                    x = -0.2f,
-                                    y = 1.5f
-                                )
-                            ),
-                        )
-                    }
-
-                    var mindMapOffset by remember {
-                        mutableStateOf(IntOffset.Zero)
-                    }
-                    LazyMindMap(
-                        items = mindMapItems,
-                        mindMapOffset = mindMapOffset,
-                        onDrag = { delta ->
-                            mindMapOffset += delta
-                        },
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(innerPadding)
-                    )
+                    LaunchedEffectDemo()
                 }
             }
         }
