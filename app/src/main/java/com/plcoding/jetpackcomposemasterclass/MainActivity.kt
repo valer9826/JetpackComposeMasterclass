@@ -55,6 +55,7 @@ import com.plcoding.jetpackcomposemasterclass.ui.theme.JetpackComposeMasterclass
 import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -63,8 +64,10 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                 ) { innerPadding ->
-                    RememberUpdatedStateDemo(
-                        modifier = Modifier.padding(innerPadding)
+                    LaunchedEffectDemo(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(innerPadding)
                     )
                 }
             }
