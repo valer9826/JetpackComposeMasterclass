@@ -70,7 +70,10 @@ class MainActivity : ComponentActivity() {
                     Scaffold(
                         modifier = Modifier.fillMaxSize(),
                     ) { innerPadding ->
-
+                        HotelBookingScreen(
+                            modifier = Modifier
+                                .padding(innerPadding)
+                        )
                     }
                 }
             }

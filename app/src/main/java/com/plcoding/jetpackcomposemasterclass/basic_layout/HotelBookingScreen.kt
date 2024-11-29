@@ -91,7 +91,7 @@ fun HotelBookingScreen(modifier: Modifier = Modifier) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .heightIn(
-                            max = 250.dp
+                            max = 300.dp
                         ),
                     contentScale = ContentScale.Crop
                 )
@@ -217,15 +217,9 @@ fun HotelFadedBanner(modifier: Modifier = Modifier) {
         ) {
             Text(
                 text = "Hotel California Strawberry",
-                fontWeight = FontWeight.Bold,
-                fontSize = when(windowClass.windowWidthSizeClass) {
-                    WindowWidthSizeClass.COMPACT -> 18.sp
-                    WindowWidthSizeClass.MEDIUM -> 24.sp
-                    WindowWidthSizeClass.EXPANDED -> 28.sp
-                    else -> 18.sp
-                },
                 maxLines = 2,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.displayLarge
             )
             LabeledIcon(
                 text = "Los Angeles, California",
