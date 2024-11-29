@@ -22,10 +22,12 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -41,6 +43,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.plcoding.jetpackcomposemasterclass.basic_layout.HotelBookingScreen
 import com.plcoding.jetpackcomposemasterclass.basic_modifiers.FocusManagementModifiers
 import com.plcoding.jetpackcomposemasterclass.basic_modifiers.SpacingModifierDemo
+import com.plcoding.jetpackcomposemasterclass.basic_modifiers.TriangleShape
+import com.plcoding.jetpackcomposemasterclass.composition_locals.LocalShape
+import com.plcoding.jetpackcomposemasterclass.composition_locals.MyShapedButton
 import com.plcoding.jetpackcomposemasterclass.measurements.LazyMindMap
 import com.plcoding.jetpackcomposemasterclass.measurements.LazyScrolling
 import com.plcoding.jetpackcomposemasterclass.measurements.MindMapItem
@@ -61,14 +66,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             JetpackComposeMasterclassTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                ) { innerPadding ->
-                    LaunchedEffectDemo(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(innerPadding)
-                    )
+                CompositionLocalProvider(LocalShape provides TriangleShape) {
+                    Scaffold(
+                        modifier = Modifier.fillMaxSize(),
+                    ) { innerPadding ->
+                        MyShapedButton()
+                    }
                 }
             }
         }

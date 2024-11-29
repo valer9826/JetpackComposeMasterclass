@@ -13,9 +13,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,10 +26,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.plcoding.jetpackcomposemasterclass.ui.theme.JetpackComposeMasterclassTheme
 
+val LocalShape = compositionLocalOf {
+    RectangleShape
+}
+
 @Composable
 fun CompositionLocalDemo(modifier: Modifier = Modifier) {
-    val contentColor = LocalContentColor.current
-    val textStyle = LocalTextStyle.current
     Button(
         onClick = {},
         colors = ButtonDefaults.buttonColors(
@@ -42,6 +47,18 @@ fun CompositionLocalDemo(modifier: Modifier = Modifier) {
             )
             Text("Hello world")
         }
+    }
+}
+
+@Composable
+fun MyShapedButton(
+    modifier: Modifier = Modifier
+) {
+    Button(
+        onClick = {},
+        shape = LocalShape.current
+    ) {
+        Text("Hello world")
     }
 }
 
@@ -71,12 +88,6 @@ fun MyCustomTopAppBar(
 @Composable
 private fun CompositionLocalDemoPreview() {
     JetpackComposeMasterclassTheme {
-        MyCustomTopAppBar(
-            title = {
-                Text(
-                    text = "Hello world",
-                )
-            }
-        )
+        MyShapedButton()
     }
 }
