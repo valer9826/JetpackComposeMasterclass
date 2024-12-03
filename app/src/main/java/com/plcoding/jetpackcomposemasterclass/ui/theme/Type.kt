@@ -24,7 +24,7 @@ val Jaro = FontFamily(
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
-        fontFamily = Jaro,
+        fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
@@ -35,6 +35,6 @@ val Typography = Typography(
         fontWeight = FontWeight.Black,
         fontStyle = FontStyle.Italic,
         textDecoration = TextDecoration.Underline,
-        fontFamily = Jaro
+        fontFamily = FontFamily.Default
     )
 )
