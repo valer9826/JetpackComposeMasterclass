@@ -40,6 +40,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.plcoding.jetpackcomposemasterclass.animations.LookaheadLayoutAnimations
 import com.plcoding.jetpackcomposemasterclass.basic_layout.HotelBookingScreen
 import com.plcoding.jetpackcomposemasterclass.basic_modifiers.FocusManagementModifiers
 import com.plcoding.jetpackcomposemasterclass.basic_modifiers.SpacingModifierDemo
@@ -70,8 +71,9 @@ class MainActivity : ComponentActivity() {
                     Scaffold(
                         modifier = Modifier.fillMaxSize(),
                     ) { innerPadding ->
-                        HotelBookingScreen(
+                        LookaheadLayoutAnimations(
                             modifier = Modifier
+                                .fillMaxSize()
                                 .padding(innerPadding)
                         )
                     }
