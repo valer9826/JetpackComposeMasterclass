@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
@@ -53,6 +54,7 @@ import com.plcoding.jetpackcomposemasterclass.measurements.MindMapItem
 import com.plcoding.jetpackcomposemasterclass.measurements.SizeModifiersDemo
 import com.plcoding.jetpackcomposemasterclass.measurements.SizePositionModifiersDemo
 import com.plcoding.jetpackcomposemasterclass.measurements.SubcomposePagedRow
+import com.plcoding.jetpackcomposemasterclass.performance.MyScreen
 import com.plcoding.jetpackcomposemasterclass.side_effects.DisposableEffectDemo
 import com.plcoding.jetpackcomposemasterclass.side_effects.LaunchedEffectDemo
 import com.plcoding.jetpackcomposemasterclass.side_effects.RememberUpdatedStateDemo
@@ -71,7 +73,7 @@ class MainActivity : ComponentActivity() {
                     Scaffold(
                         modifier = Modifier.fillMaxSize(),
                     ) { innerPadding ->
-                        LookaheadLayoutAnimations(
+                        MyScreen(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(innerPadding)
