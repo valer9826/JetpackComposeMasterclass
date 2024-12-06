@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.plcoding.jetpackcomposemasterclass.basic_modifiers.TriangleShape
 import com.plcoding.jetpackcomposemasterclass.composition_locals.LocalShape
+import com.plcoding.jetpackcomposemasterclass.performance.DeferredStateReads
 import com.plcoding.jetpackcomposemasterclass.performance.KeysCustomLayout
 import com.plcoding.jetpackcomposemasterclass.performance.MovableContent
 import com.plcoding.jetpackcomposemasterclass.performance.main_safety.BitmapCompressor
@@ -29,15 +30,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             JetpackComposeMasterclassTheme {
                 CompositionLocalProvider(LocalShape provides TriangleShape) {
-                    Scaffold(
-                        modifier = Modifier.fillMaxSize(),
-                    ) { innerPadding ->
-                        MovableContent(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(innerPadding)
-                        )
-                    }
+                    DeferredStateReads(
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
+//                    Scaffold(
+//                        modifier = Modifier.fillMaxSize(),
+//                    ) { innerPadding ->
+//                    }
                 }
             }
         }
