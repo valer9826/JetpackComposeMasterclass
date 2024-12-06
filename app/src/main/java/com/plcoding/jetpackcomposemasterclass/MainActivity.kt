@@ -55,6 +55,7 @@ import com.plcoding.jetpackcomposemasterclass.measurements.SizeModifiersDemo
 import com.plcoding.jetpackcomposemasterclass.measurements.SizePositionModifiersDemo
 import com.plcoding.jetpackcomposemasterclass.measurements.SubcomposePagedRow
 import com.plcoding.jetpackcomposemasterclass.performance.ImageLoading
+import com.plcoding.jetpackcomposemasterclass.performance.LazyListPerformance
 import com.plcoding.jetpackcomposemasterclass.performance.MyScreen
 import com.plcoding.jetpackcomposemasterclass.side_effects.DisposableEffectDemo
 import com.plcoding.jetpackcomposemasterclass.side_effects.LaunchedEffectDemo
@@ -74,7 +75,7 @@ class MainActivity : ComponentActivity() {
                     Scaffold(
                         modifier = Modifier.fillMaxSize(),
                     ) { innerPadding ->
-                        ImageLoading(
+                        LazyListPerformance(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(innerPadding)
