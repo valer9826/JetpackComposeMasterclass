@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.plcoding.jetpackcomposemasterclass.basic_modifiers.TriangleShape
 import com.plcoding.jetpackcomposemasterclass.composition_locals.LocalShape
 import com.plcoding.jetpackcomposemasterclass.performance.KeysCustomLayout
+import com.plcoding.jetpackcomposemasterclass.performance.MovableContent
 import com.plcoding.jetpackcomposemasterclass.performance.main_safety.BitmapCompressor
 import com.plcoding.jetpackcomposemasterclass.performance.main_safety.PhotoPickerScreen
 import com.plcoding.jetpackcomposemasterclass.ui.theme.JetpackComposeMasterclassTheme
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     Scaffold(
                         modifier = Modifier.fillMaxSize(),
                     ) { innerPadding ->
-                        KeysCustomLayout(
+                        MovableContent(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(innerPadding)
