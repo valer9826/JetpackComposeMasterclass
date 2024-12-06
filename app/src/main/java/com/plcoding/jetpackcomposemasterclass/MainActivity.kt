@@ -18,6 +18,7 @@ import com.plcoding.jetpackcomposemasterclass.composition_locals.LocalShape
 import com.plcoding.jetpackcomposemasterclass.performance.DeferredStateReads
 import com.plcoding.jetpackcomposemasterclass.performance.KeysCustomLayout
 import com.plcoding.jetpackcomposemasterclass.performance.MovableContent
+import com.plcoding.jetpackcomposemasterclass.performance.OverdrawDemo
 import com.plcoding.jetpackcomposemasterclass.performance.main_safety.BitmapCompressor
 import com.plcoding.jetpackcomposemasterclass.performance.main_safety.PhotoPickerScreen
 import com.plcoding.jetpackcomposemasterclass.ui.theme.JetpackComposeMasterclassTheme
@@ -30,14 +31,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             JetpackComposeMasterclassTheme {
                 CompositionLocalProvider(LocalShape provides TriangleShape) {
-                    DeferredStateReads(
-                        modifier = Modifier
-                            .fillMaxSize()
-                    )
-//                    Scaffold(
-//                        modifier = Modifier.fillMaxSize(),
-//                    ) { innerPadding ->
-//                    }
+                    Scaffold(
+                        modifier = Modifier.fillMaxSize(),
+                    ) { innerPadding ->
+                        OverdrawDemo(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(innerPadding)
+                        )
+                    }
                 }
             }
         }
