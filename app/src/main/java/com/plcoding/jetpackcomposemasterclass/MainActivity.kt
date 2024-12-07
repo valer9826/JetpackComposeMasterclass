@@ -20,6 +20,7 @@ import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.tooling.preview.Preview
 import com.plcoding.jetpackcomposemasterclass.basic_modifiers.TriangleShape
 import com.plcoding.jetpackcomposemasterclass.composition_locals.LocalShape
+import com.plcoding.jetpackcomposemasterclass.internals.snapshots
 import com.plcoding.jetpackcomposemasterclass.performance.DeferredStateReads
 import com.plcoding.jetpackcomposemasterclass.performance.KeysCustomLayout
 import com.plcoding.jetpackcomposemasterclass.performance.LazyListPerformance
@@ -34,6 +35,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        snapshots()
         setContent {
             JetpackComposeMasterclassTheme {
                 CompositionLocalProvider(LocalShape provides TriangleShape) {
