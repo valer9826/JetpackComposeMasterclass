@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeUiApi::class)
+
 package com.plcoding.jetpackcomposemasterclass
 
 import android.os.Bundle
@@ -11,12 +13,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.tooling.preview.Preview
 import com.plcoding.jetpackcomposemasterclass.basic_modifiers.TriangleShape
 import com.plcoding.jetpackcomposemasterclass.composition_locals.LocalShape
 import com.plcoding.jetpackcomposemasterclass.performance.DeferredStateReads
 import com.plcoding.jetpackcomposemasterclass.performance.KeysCustomLayout
+import com.plcoding.jetpackcomposemasterclass.performance.LazyListPerformance
 import com.plcoding.jetpackcomposemasterclass.performance.MovableContent
 import com.plcoding.jetpackcomposemasterclass.performance.OverdrawDemo
 import com.plcoding.jetpackcomposemasterclass.performance.main_safety.BitmapCompressor
@@ -32,9 +38,13 @@ class MainActivity : ComponentActivity() {
             JetpackComposeMasterclassTheme {
                 CompositionLocalProvider(LocalShape provides TriangleShape) {
                     Scaffold(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .semantics {
+                                testTagsAsResourceId = true
+                            },
                     ) { innerPadding ->
-                        OverdrawDemo(
+                        LazyListPerformance(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(innerPadding)
