@@ -26,8 +26,10 @@ import com.plcoding.jetpackcomposemasterclass.performance.KeysCustomLayout
 import com.plcoding.jetpackcomposemasterclass.performance.LazyListPerformance
 import com.plcoding.jetpackcomposemasterclass.performance.MovableContent
 import com.plcoding.jetpackcomposemasterclass.performance.OverdrawDemo
+import com.plcoding.jetpackcomposemasterclass.performance.homework.ListItemScreenRoot
 import com.plcoding.jetpackcomposemasterclass.performance.main_safety.BitmapCompressor
 import com.plcoding.jetpackcomposemasterclass.performance.main_safety.PhotoPickerScreen
+import com.plcoding.jetpackcomposemasterclass.side_effects.LaunchedEffectDemo
 import com.plcoding.jetpackcomposemasterclass.ui.theme.JetpackComposeMasterclassTheme
 
 class MainActivity : ComponentActivity() {
@@ -38,20 +40,15 @@ class MainActivity : ComponentActivity() {
         snapshots()
         setContent {
             JetpackComposeMasterclassTheme {
-                CompositionLocalProvider(LocalShape provides TriangleShape) {
-                    Scaffold(
+                Scaffold(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                ) { innerPadding ->
+                    ListItemScreenRoot(
                         modifier = Modifier
                             .fillMaxSize()
-                            .semantics {
-                                testTagsAsResourceId = true
-                            },
-                    ) { innerPadding ->
-                        LazyListPerformance(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(innerPadding)
-                        )
-                    }
+                            .padding(innerPadding)
+                    )
                 }
             }
         }

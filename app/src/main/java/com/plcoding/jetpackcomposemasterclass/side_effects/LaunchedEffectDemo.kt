@@ -74,10 +74,8 @@ class EffectHandlerViewModel: ViewModel() {
     }
 
     fun scrollToTop(uiScope: CoroutineScope) {
-        viewModelScope.launch {
-            withContext(uiScope.coroutineContext) {
-                lazyListState.animateScrollToItem(0)
-            }
+        viewModelScope.launch(uiScope.coroutineContext) {
+            lazyListState.animateScrollToItem(0)
         }
     }
 
