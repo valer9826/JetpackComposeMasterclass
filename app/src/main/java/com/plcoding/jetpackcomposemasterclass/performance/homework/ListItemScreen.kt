@@ -1,9 +1,9 @@
 package com.plcoding.jetpackcomposemasterclass.performance.homework
 
-import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.compose.animation.core.Animatable
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Box
@@ -36,24 +36,25 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil3.compose.AsyncImage
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-
-private const val FILE_NAME = "kermit.jpg"
+import kotlinx.coroutines.withContext
+import kotlin.math.roundToInt
 
 val initialItems = (1..100).map {
     ListItem(
@@ -70,18 +71,31 @@ data class ListItem(
     val title: String,
     val description: String,
     val isContextMenuVisible: Boolean,
-    val photo: ImageBitmap?
+    val photo: Bitmap?
 )
 
 sealed interface ListAction {
     data class OnContextVisibilityChange(val id: Int, val isVisible: Boolean): ListAction
-    data class OnCreatePhoto(val id: Int, val photo: ImageBitmap): ListAction
+    data class OnCreatePhoto(val id: Int, val photo: Bitmap): ListAction
 }
 
-class ListViewModel: ViewModel() {
+class ListViewModel(
+    private val assetReader: AssetReader
+): ViewModel() {
 
     private val _items = MutableStateFlow(initialItems)
     val items = _items.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            val bmp = assetReader.assetToBitmap()
+            _items.update { currentItems ->
+                currentItems.map {
+                    it.copy(photo = bmp)
+                }
+            }
+        }
+    }
 
     fun onAction(action: ListAction) {
         when(action) {
@@ -109,7 +123,13 @@ class ListViewModel: ViewModel() {
 
 @Composable
 fun ListItemScreenRoot(modifier: Modifier = Modifier) {
-    val viewModel = viewModel<ListViewModel>()
+    val context = LocalContext.current.applicationContext
+    val assetReader = remember {
+        AssetReader(context)
+    }
+    val viewModel = viewModel<ListViewModel> {
+        ListViewModel(assetReader = assetReader)
+    }
     val items by viewModel.items.collectAsStateWithLifecycle()
     Homework1(
         items = items,
@@ -118,26 +138,33 @@ fun ListItemScreenRoot(modifier: Modifier = Modifier) {
     )
 }
 
+class AssetReader(private val context: Context) {
+
+    suspend fun assetToBitmap(fileName: String = "kermit.jpg"): Bitmap {
+        return withContext(Dispatchers.IO) {
+            context.assets.open(fileName).use {
+                it.readBytes()
+            }.let {
+                BitmapFactory.decodeByteArray(it, 0, it.size)
+            }
+        }
+    }
+}
+
 @Composable
 fun Homework1(
     items: List<ListItem>,
     onAction: (ListAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
     LazyColumn(
         modifier = modifier
             .fillMaxSize(),
     ) {
-        items(items) { item ->
-            LaunchedEffect(item.photo) {
-                context.assets.open(FILE_NAME).use {
-                    it.readBytes()
-                }.also {
-                    val bmp = BitmapFactory.decodeByteArray(it, 0, it.size).asImageBitmap()
-                    onAction(ListAction.OnCreatePhoto(item.id, bmp))
-                }
-            }
+        items(
+            items = items,
+            key = { it.id }
+        ) { item ->
             ContextualListItem(
                 item = item,
                 modifier = Modifier
@@ -166,7 +193,6 @@ fun Homework1(
     }
 }
 
-@SuppressLint("UseOfNonLambdaOffsetOverload")
 @Composable
 private fun ContextualListItem(
     item: ListItem,
@@ -199,6 +225,7 @@ private fun ContextualListItem(
             modifier = Modifier
                 .fillMaxHeight()
                 .background(Color.Green)
+                // The recomposition based on onSizeChanged is unavoidable
                 .onSizeChanged { contextMenuWidth = it.width.toFloat() }
         ) {
             actions()
@@ -208,8 +235,8 @@ private fun ContextualListItem(
             supportingContent = { Text(item.description) },
             leadingContent = {
                 item.photo?.let {
-                    Image(
-                        bitmap = item.photo,
+                    AsyncImage(
+                        model = item.photo,
                         contentDescription = null,
                         modifier = Modifier
                             .size(100.dp),
@@ -218,9 +245,9 @@ private fun ContextualListItem(
                 }
             },
             modifier = Modifier
-                .offset(x = with(LocalDensity.current) {
-                    offset.value.toDp()
-                })
+                .offset {
+                    IntOffset(x = offset.value.roundToInt(), y = 0)
+                }
                 .background(Color.Green)
                 .pointerInput(true) {
                     detectHorizontalDragGestures(
