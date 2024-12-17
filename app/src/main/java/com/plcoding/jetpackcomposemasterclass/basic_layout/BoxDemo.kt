@@ -17,8 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.plcoding.jetpackcomposemasterclass.R
 import com.plcoding.jetpackcomposemasterclass.ui.theme.JetpackComposeMasterclassTheme
 
@@ -31,6 +33,13 @@ fun BoxDemo(modifier: Modifier = Modifier) {
         Image(
             painter = painterResource(R.drawable.kermit),
             contentDescription = null
+        )
+        Text(
+            text = "These are 3 Kermits",
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            fontSize = 30.sp,
+            modifier = Modifier.align(Alignment.Center)
         )
         Box(
             modifier = Modifier
@@ -52,7 +61,7 @@ fun BoxDemo(modifier: Modifier = Modifier) {
             Icon(
                 imageVector = Icons.Default.Star,
                 contentDescription = null,
-                tint = Color.Yellow
+                tint = Color.White
             )
         }
     }
