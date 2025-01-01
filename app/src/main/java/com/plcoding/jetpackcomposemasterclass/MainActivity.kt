@@ -50,6 +50,7 @@ import com.plcoding.jetpackcomposemasterclass.measurements.SubcomposePagedRow
 import com.plcoding.jetpackcomposemasterclass.side_effects.DisposableEffectDemo
 import com.plcoding.jetpackcomposemasterclass.side_effects.LaunchedEffectDemo
 import com.plcoding.jetpackcomposemasterclass.side_effects.RememberUpdatedStateDemo
+import com.plcoding.jetpackcomposemasterclass.side_effects.SideEffectsHomework
 import com.plcoding.jetpackcomposemasterclass.state_management.number_guess.NumberGuessScreenRoot
 import com.plcoding.jetpackcomposemasterclass.ui.theme.JetpackComposeMasterclassTheme
 import kotlin.random.Random
@@ -61,15 +62,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             JetpackComposeMasterclassTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                ) { innerPadding ->
-                    LaunchedEffectDemo(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(innerPadding)
-                    )
-                }
+                SideEffectsHomework(
+                    list = (1..50).map {
+                        "$it"
+                    },
+                )
             }
         }
     }
