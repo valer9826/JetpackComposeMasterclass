@@ -183,7 +183,7 @@ data class AnimateLayoutChangesElement(
     private val scope: LookaheadScope,
     private val positionAnimation: DeferredTargetAnimation<IntOffset, AnimationVector2D>,
     private val sizeAnimation: DeferredTargetAnimation<IntSize, AnimationVector2D>,
-): ModifierNodeElement<AnimateLayoutChangesNode>() {
+) : ModifierNodeElement<AnimateLayoutChangesNode>() {
 
     override fun create(): AnimateLayoutChangesNode {
         return AnimateLayoutChangesNode(
@@ -252,7 +252,7 @@ class AnimateLayoutChangesNode(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun LookaheadLayoutAnimationsPreview() {
     JetpackComposeMasterclassTheme {
